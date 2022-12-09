@@ -102,7 +102,7 @@ const CheckoutOrderScreen = () => {
         <View style={styles.cart}>
           <Text style={[TextStyles.h3, styles.locationCart]}>Order Summary</Text>
           {carts.map((item, index) => (
-            <CartCard item={item} key={index.toString()} />
+            <CartCard item={item} key={index.toString()} showClose={false} />
           ))}
         </View>
         <View>
