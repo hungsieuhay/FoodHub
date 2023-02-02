@@ -27,6 +27,11 @@ const Menu = ({ isMenuShown, handleShowMenu }) => {
   const navigation = useNavigation();
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const dispatch = useDispatch();
+  const [fullname, setFullname] = useState('');
+  const [photoURL, setPhotoURL] = useState('');
+  const [email, setEmail] = useState('');
+  const id = auth()?.currentUser?.uid;
+  console.log(fullname, email);
   useEffect(() => {
     if (!auth().currentUser.email) {
       dispatch(
@@ -38,8 +43,15 @@ const Menu = ({ isMenuShown, handleShowMenu }) => {
         })
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const getUser = async () => {
+      const data = await firestore().collection('users').doc(id).get();
+      console.log(data);
+      setFullname(data.data().fullname);
+      setPhotoURL(data.data().photoURL);
+      setEmail(data.data().email);
+    };
+    getUser();
+  }, [dispatch, id]);
 
   const renderItem = (item) => {
     return (
@@ -68,12 +80,12 @@ const Menu = ({ isMenuShown, handleShowMenu }) => {
         <LogoutConfirm onCancel={() => setIsPopupVisible(false)} onLogout={onLogout} />
       </Popup>
       <View style={LayoutStyles.layoutShadowRed}>
-        <Image source={{ uri: currentUser.photoURL }} style={styles.avatar} />
+        <Image source={{ uri: photoURL || currentUser.photoURL }} style={styles.avatar} />
       </View>
       <Text style={TextStyles.h2} numberOfLines={2}>
-        {currentUser.fullname}
+        {fullname}
       </Text>
-      <Text style={TextStyles.textMain}>{currentUser.email}</Text>
+      <Text style={TextStyles.textMain}>{email}</Text>
 
       <View style={styles.menuItemGroup}>{MenuItems.map((item) => renderItem(item))}</View>
 

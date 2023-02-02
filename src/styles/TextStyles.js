@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import Colors from '../constants/Color';
 import Sizes from '../constants/Size';
 
-module.exports = StyleSheet.create({
+export default StyleSheet.create({
   h1: {
     fontFamily: 'Poppins-Bold',
     //fontSize 48

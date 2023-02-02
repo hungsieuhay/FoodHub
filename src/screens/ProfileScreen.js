@@ -18,8 +18,8 @@ import auth from '@react-native-firebase/auth';
 
 const ProfileScreen = () => {
   const [fullName, setFullname] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [photoURL, setPhotoURL] = useState('');
   const navigation = useNavigation();
   const { currentUser } = useSelector((state) => state.user);
