@@ -35,7 +35,7 @@ const FoodAddonList = ({ data, currentAddon, onSelect }) => {
         <Text style={TextStyles.h3}>
           {data.length} Choice{data.length === 1 ? '' : 's'} of Add On
         </Text>
-        <TouchableOpacity onPress={() => onSelect(null)}>
+        <TouchableOpacity onPress={() => onSelect({ name: '_', price: 0 })}>
           <Text style={[TextStyles.textMain, styles.ratingLinkText]}>Clear All</Text>
         </TouchableOpacity>
       </View>

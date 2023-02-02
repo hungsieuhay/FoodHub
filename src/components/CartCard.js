@@ -12,7 +12,7 @@ import { addToCart, removeFromCart } from '../features/cartSlice';
 import { Images } from '../../assets';
 import { formatPrice } from '../utils/formatter';
 
-const CartCard = ({ item, onConfirmRemove }) => {
+const CartCard = ({ item, onConfirmRemove, showClose = true }) => {
   const dispatch = useDispatch();
 
   const handleRemoveItem = (item, itemQuantity) => {
@@ -25,12 +25,14 @@ const CartCard = ({ item, onConfirmRemove }) => {
 
   return (
     <View style={[LayoutStyles.layoutShadowGrey, styles.card]}>
-      <TouchableOpacity
-        style={[LayoutStyles.layoutShadowGrey, styles.cardRemover]}
-        onPress={() => handleRemoveItem(item, item.quantity)}
-      >
-        <Image source={Images.ICON.CLOSE} />
-      </TouchableOpacity>
+      {showClose && (
+        <TouchableOpacity
+          style={[LayoutStyles.layoutShadowGrey, styles.cardRemover]}
+          onPress={() => handleRemoveItem(item, item.quantity)}
+        >
+          <Image source={Images.ICON.CLOSE} />
+        </TouchableOpacity>
+      )}
       <Image source={{ uri: item.image }} style={styles.cardThumbnail} />
       <View style={styles.cardContent}>
         <Text numberOfLines={2} style={TextStyles.h3}>

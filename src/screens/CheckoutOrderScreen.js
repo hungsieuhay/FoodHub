@@ -32,6 +32,7 @@ const CheckoutOrderScreen = () => {
   const paymentMethod = route.params.paymentMethod;
   const dispatch = useDispatch();
   const id = auth()?.currentUser?.uid;
+
   useEffect(() => {
     const checkAddress = async () => {
       const data = await firestore().collection('users').doc(id).get();
@@ -101,7 +102,7 @@ const CheckoutOrderScreen = () => {
         <View style={styles.cart}>
           <Text style={[TextStyles.h3, styles.locationCart]}>Order Summary</Text>
           {carts.map((item, index) => (
-            <CartCard item={item} key={index.toString()} />
+            <CartCard item={item} key={index.toString()} showClose={false} />
           ))}
         </View>
         <View>
