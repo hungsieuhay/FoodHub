@@ -27,18 +27,11 @@ const Menu = ({ isMenuShown, handleShowMenu }) => {
   const navigation = useNavigation();
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const dispatch = useDispatch();
-<<<<<<< HEAD
   const [fullname, setFullname] = useState('');
   const [photoURL, setPhotoURL] = useState('');
   const [email, setEmail] = useState('');
   const id = auth()?.currentUser?.uid;
   console.log(fullname, email);
-=======
-  const [fullName, setFullname] = useState('');
-  const [email, setEmail] = useState('');
-  const [photoURL, setPhotoURL] = useState('');
-  const id = auth()?.currentUser?.uid;
->>>>>>> 75a0f0757960e8d7e99c0420c3073750bd9a5f79
   useEffect(() => {
     if (!auth()?.currentUser?.email) {
       setFullname('admin');
@@ -57,7 +50,6 @@ const Menu = ({ isMenuShown, handleShowMenu }) => {
         });
       return () => subscriber();
     }
-<<<<<<< HEAD
     const getUser = async () => {
       const data = await firestore().collection('users').doc(id).get();
       console.log(data);
@@ -67,9 +59,6 @@ const Menu = ({ isMenuShown, handleShowMenu }) => {
     };
     getUser();
   }, [dispatch, id]);
-=======
-  }, [id]);
->>>>>>> 75a0f0757960e8d7e99c0420c3073750bd9a5f79
 
   const renderItem = (item) => {
     return (
@@ -98,21 +87,12 @@ const Menu = ({ isMenuShown, handleShowMenu }) => {
         <LogoutConfirm onCancel={() => setIsPopupVisible(false)} onLogout={onLogout} />
       </Popup>
       <View style={LayoutStyles.layoutShadowRed}>
-<<<<<<< HEAD
         <Image source={{ uri: photoURL || currentUser.photoURL }} style={styles.avatar} />
       </View>
       <Text style={TextStyles.h2} numberOfLines={2}>
         {fullname}
       </Text>
       <Text style={TextStyles.textMain}>{email}</Text>
-=======
-        <Image source={{ uri: photoURL || currentUser?.photoURL }} style={styles.avatar} />
-      </View>
-      <Text style={TextStyles.h2} numberOfLines={2}>
-        {fullName || currentUser?.fullname}
-      </Text>
-      <Text style={TextStyles.textMain}>{email || currentUser?.email}</Text>
->>>>>>> 75a0f0757960e8d7e99c0420c3073750bd9a5f79
 
       <View style={styles.menuItemGroup}>{MenuItems.map((item) => renderItem(item))}</View>
 
